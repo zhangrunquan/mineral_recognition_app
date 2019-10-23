@@ -17,7 +17,7 @@ class Tools():
             if os.path.isfile(filePath):
                 os.remove(filePath)
             elif os.path.isdir(filePath):
-                    removeDir(filePath)
+                    Tools.removeDir(filePath)
         os.rmdir(dirPath)
     @staticmethod
     def read_list(filepath): 
@@ -31,3 +31,4 @@ class MetaInfo():
     increase_num=15 #每次下拉到底新增图片数
     save_dir='./photos/' #输出文件夹
     label_file_path='./label.txt' #关键词文件
+    log_file_path='./log.txt'

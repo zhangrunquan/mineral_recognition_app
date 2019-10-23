@@ -1,5 +1,7 @@
 mindat_crawler/scrapy.cfg
+mindat_crawler/mindat_crawler/photos
 __pycache__
 test.py
 .vscode
 *.log
+log.txt
