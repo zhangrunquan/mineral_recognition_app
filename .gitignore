@@ -1,0 +1,5 @@
+mindat_crawler/scrapy.cfg
+__pycache__
+test.py
+.vscode
+*.log
