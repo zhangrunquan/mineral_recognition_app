@@ -31,4 +31,8 @@ class MetaInfo():
     increase_num=15 #每次下拉到底新增图片数
     save_dir='./photos/' #输出文件夹
     label_file_path='./label.txt' #关键词文件
-    log_file_path='./log.txt'
+    log_file_path='./log.txt' #记录获取到各种图片链接数的log
+
+class LinkListCrawlerMeta():
+    log_file_path='./link_list_crawler_log'
+    save_dir='./link_list/'
