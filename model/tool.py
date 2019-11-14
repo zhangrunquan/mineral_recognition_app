@@ -5,7 +5,7 @@ import numpy as np
 from keras.models import Sequential
 from keras.layers import Convolution2D, Activation, MaxPooling2D, Dense,Conv2D,Flatten,Dropout
 from keras.optimizers import Adam
-from spp.SpatialPyramidPooling import SpatialPyramidPooling
+# from spp.SpatialPyramidPooling import SpatialPyramidPooling
 from keras.utils.np_utils import to_categorical
 from keras.preprocessing.image import ImageDataGenerator
 import scipy
@@ -67,3 +67,4 @@ class MetaInfo():
 class LinkListCrawlerMeta():
     log_file_path='./link_list_crawler_log'
     save_dir='./link_list/'
+

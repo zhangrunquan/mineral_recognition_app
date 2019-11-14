@@ -5,7 +5,7 @@ from tool import Tools
 from keras.models import Sequential
 from keras.layers import Convolution2D, Activation, MaxPooling2D, Dense,Conv2D,Flatten,Dropout
 from keras.optimizers import Adam
-from spp.SpatialPyramidPooling import SpatialPyramidPooling
+# from spp.SpatialPyramidPooling import SpatialPyramidPooling
 from keras.utils.np_utils import to_categorical
 from keras.preprocessing.image import ImageDataGenerator
 import scipy
@@ -29,7 +29,7 @@ directories=set(os.listdir())-remove
 # 建立标签到数字的映射
 tmp=dict(enumerate(directories))
 label_num_mapping={v:k for k,v in tmp.items()}
-Tools.create_save_dir('./data')
+Tools.create_save_dir(output_dir)
 x_train,y_train,x_test,y_test=Tools.load_data(directories,label_num_mapping,num_classes,test_split=0.1)
 
 # 图片预处理工具

@@ -4,7 +4,7 @@ from tool import Tools
 from keras.models import Sequential
 from keras.layers import Convolution2D, Activation, MaxPooling2D, Dense,Conv2D,Flatten,Dropout
 from keras.optimizers import Adam
-from spp.SpatialPyramidPooling import SpatialPyramidPooling
+# from spp.SpatialPyramidPooling import SpatialPyramidPooling
 from keras.utils.np_utils import to_categorical
 from keras.preprocessing.image import ImageDataGenerator
 import scipy
