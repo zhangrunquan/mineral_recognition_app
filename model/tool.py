@@ -12,12 +12,13 @@ import scipy
 from scipy.misc import imresize
 from PIL import Image
 import random
+from tqdm import tqdm
 
 class Tools():
     @staticmethod
     def load_data(directories,label_num_mapping,num_classes,test_split):
         x_train,y_train,x_test,y_test=[],[],[],[]
-        for directory in directories:
+        for directory in tqdm(directories,ncols=10):
             tmp_data=[ mpimg.imread(directory+'/'+img) for img in os.listdir(directory) ]
             cut=int(len(tmp_data)*test_split)
             x_train=x_train+tmp_data[cut:]
@@ -28,6 +29,14 @@ class Tools():
         x_train,y_train=np.asarray(x_train),np.asarray(y_train)
         x_test,y_test=np.asarray(x_test),np.asarray(y_test)
         return x_train,y_train,x_test,y_test
+    @staticmethod
+    def load_npy_data(input_dir):
+        x_train=np.load(input_dir+'x_train.npy',allow_pickle=True)
+        x_test=np.load(input_dir+'x_test.npy',allow_pickle=True)
+        y_train=np.load(input_dir+'y_train.npy',allow_pickle=True)
+        y_test=np.load(input_dir+'y_test.npy',allow_pickle=True)
+        return x_train,y_train,x_test,y_test
+        
     @staticmethod
     def get_search_url(keyword):
         return 'https://www.mindat.org/photoscroll.php?frm_id=pscroll&cform_is_valid=1&searchbox={keyword}&submit_pscroll=Search'.format(keyword=keyword)
@@ -67,4 +76,3 @@ class MetaInfo():
 class LinkListCrawlerMeta():
     log_file_path='./link_list_crawler_log'
     save_dir='./link_list/'
-
