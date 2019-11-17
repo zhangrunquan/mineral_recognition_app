@@ -5,9 +5,9 @@ from PIL import Image
 from tqdm import tqdm
 
 
-class Tools():
-     """提供一般性的常用函数
-     """
+class Tools:
+    """提供一般性的常用函数
+    """
     @staticmethod
     def create_save_dir(path):
         if(not os.path.exists(path)):

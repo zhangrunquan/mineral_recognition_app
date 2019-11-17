@@ -21,14 +21,15 @@ def get_args():
 def standardize_img(directory,img_path,height,width,output_dir):
     try:
         # tmp=mpimg.imread(directory+'/'+img_path)
-        tmp=Image.open(os.path.join(directory,img_path)).convert('RGB').resize((width,height))
+        img=Image.open(os.path.join(directory,img_path)).convert('RGB').resize((width,height))
     except Exception as e:
         print(str(e))
         print(directory+','+img_path)
         return
     
     filename=str(time.time())+str(random.randint(1,100))+'.png'
-    imsave(output_dir+directory+filename,tmp)
+    # imsave(output_dir+directory+filename,tmp)
+    img.save(os.path.join(output_dir,directory,filename))
     
 args=get_args()
 output_dir=args.output_dir

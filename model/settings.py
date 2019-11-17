@@ -1,4 +1,3 @@
-
 class Settings():
     
     MAX_PIC_NUM=2450 #每种类最大图片数
