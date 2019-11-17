@@ -56,7 +56,8 @@ class Loader():
         @param nb_classes:种类数(onehot向量长度)
         '''
         res = np.eye(nb_classes)[np.array(targets).reshape(-1)]
-        res=np.asarray(res,dtype=np.int8)
+        if(nb_classes<128):
+            res=np.asarray(res,dtype=np.int8)
         return res.reshape(list(targets.shape)+[nb_classes])
 
     

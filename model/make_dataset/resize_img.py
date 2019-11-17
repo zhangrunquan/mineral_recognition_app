@@ -14,13 +14,14 @@ def get_args():
     parser=argparse.ArgumentParser()
     parser.add_argument('width',type=int)
     parser.add_argument('height',type=int)
+    parser.add_argument('output_dir')
     return parser.parse_args()
 
 # 单张图片转换为三通道,相同大小,保存到目标文件夹
 def standardize_img(directory,img_path,height,width,output_dir):
     try:
-        tmp=mpimg.imread(directory+'/'+img_path)
-        tmp=Image.fromarray(tmp).convert('RGB').resize((width,height))
+        # tmp=mpimg.imread(directory+'/'+img_path)
+        tmp=Image.open(os.path.join(directory,img_path)).convert('RGB').resize((width,height))
     except Exception as e:
         print(str(e))
         print(directory+','+img_path)
@@ -30,7 +31,7 @@ def standardize_img(directory,img_path,height,width,output_dir):
     imsave(output_dir+directory+filename,tmp)
     
 args=get_args()
-output_dir='data/'
+output_dir=args.output_dir
 Tools.create_save_dir(output_dir)
 remove={'a.py','.vscode','tool.py','data','__pycache__','make_dataset.py','test_spp.py','test_spp2.py','test_spp3.py','resize_img.py'}
 directories=set(os.listdir())-remove
