@@ -41,6 +41,7 @@ class Loader():
         Args:
             directory: 图片文件夹
             test_split 切分验证集的比例
+            transform: func(data) return data 对加载数据做转换
         Returns: 
             图片构成的训练集和测试集
         """
@@ -68,7 +69,8 @@ class Loader():
         x_train,y_train,x_test,y_test=[],[],[],[]
         for directory in tqdm(directories,ncols=10):
             tmp_train,tmp_test=Loader.load_pic(directory,test_split)
-            tmp_train,tmp_test=Loader.over_sample(tmp_train,least_num),Loader.over_sample(tmp_test,least_num)
+            tmp_train=Loader.over_sample(tmp_train,int(least_num*(1-test_split)))
+            tmp_test=Loader.over_sample(tmp_test,int(least_num*test_split))
             x_train+=list(tmp_train)
             x_test+=list(tmp_test)
             num_label=label_num_mapping[directory]
@@ -88,13 +90,14 @@ class Loader():
     '''
     @staticmethod
     def over_sample(arr,length):
+        arr=np.asarray(arr)
         len_arr=len(arr)
         n=int(length/len_arr-1)
         tmp=arr
         for i in range(n):
             tmp=np.vstack([tmp,arr])
-        left=length-n*len_arr
-        tmp=np.vstack([tmp,arr[:left]])
+        left=length-len(tmp)
+        tmp=np.vstack([tmp,arr[:left,...]])
         return tmp
     
     @staticmethod
