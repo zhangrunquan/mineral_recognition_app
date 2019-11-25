@@ -35,6 +35,24 @@ class DatasetMaker():
         np.save(os.path.join(output_dir,'x_test.npy'),x_test)
         np.save(os.path.join(output_dir,'y_test.npy'),y_test)
 
+    @staticmethod
+    def get_pic_middle(pic,out_put_size):
+        """取图片的中间n*n像素作为新图片
+        
+        Args:
+            ndarray: pic 一张图片(3,n,k)
+            int: output_size 输出图片大小
+        
+        Returns:
+            ndarray: 新图片
+        """
+        shape=pic.shape
+        middle1,middle2=int(shape[0]/2),int(shape[1]/2)
+        r=int(out_put_size/2)
+        return pic[middle1-r:middle1+r,middle2-r:middle2+r,:]
+
+       
+
 if __name__ == "__main__":
     args=get_args()
     DatasetMaker.save_npy(args.input_dir,args.output_dir,sample_mode=args.sample_mode,label_mode=args.label_mode)
