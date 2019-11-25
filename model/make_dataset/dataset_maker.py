@@ -51,7 +51,17 @@ class DatasetMaker():
         r=int(out_put_size/2)
         return pic[middle1-r:middle1+r,middle2-r:middle2+r,:]
 
-       
+    @staticmethod
+    def get_shuffled_pic(pic,horizontal_split,vertical_split):
+        """取图片的中间n*n像素作为新图片
+        
+        Args:
+            ndarray: pic 一张图片(3,n,k)
+            
+        
+        Returns:
+            ndarray: 新图片
+        """
 
 if __name__ == "__main__":
     args=get_args()
