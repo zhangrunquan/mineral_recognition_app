@@ -175,7 +175,9 @@ class DatasetMaker():
         tmp=row_lst[0]
         for i in range(1,len(row_lst)):
             tmp=np.concatenate([tmp,row_lst[i]],axis=1)
-        return tmp
+        img=Image.fromarray(tmp)
+        img=img.resize((width,height))
+        return np.array(img)
 
 if __name__ == "__main__":
     args=get_args()
