@@ -20,7 +20,7 @@ batch_size = 128
 num_channels = 3
 num_classes = 61
 epochs=50
-
+#####
 # 读取数据
 output_dir='data/'
 remove={'a.py','.vscode','tool.py','data','__pycache__','make_dataset.py','test_spp.py','test_spp2.py','test_spp3.py','resize_img.py','test_spp4.py',
