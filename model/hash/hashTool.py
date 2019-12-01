@@ -8,7 +8,7 @@ import heapq
 from PIL import Image
 
 from tqdm import tqdm
-
+#change by cn
 class HashTool:
     """生成图片hash相关的工具函数集"""
 
