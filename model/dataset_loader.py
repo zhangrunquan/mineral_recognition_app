@@ -47,6 +47,7 @@ class Loader():
         """
         x_train,y_train,x_test,y_test=[],[],[],[]
         data=[ np.array(Image.open(directory+'/'+img))  for img in os.listdir(directory) ]
+        random.shuffle(data)
         cut=int(len(data)*test_split)
         return data[cut:],data[:cut]
 
