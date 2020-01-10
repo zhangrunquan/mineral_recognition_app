@@ -7,3 +7,5 @@ test.py
 log.txt
 *.txt
 model/test
+*.idea/
+app
