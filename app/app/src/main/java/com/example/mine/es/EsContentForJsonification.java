@@ -1,6 +1,5 @@
 package com.example.mine.es;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -8,16 +7,14 @@ public class EsContentForJsonification {
     /**
      * 用来json序列化
      */
-    private List<Map<String, String>> singleValueFields;
-    private List<Map<String, Set<String>>> multiValueFields;
-    private List<Map<String, Map<String, String>>> fromToFields;
+    private Map<String, String> singleValueMap;
+    private Map<String, Set<String>> multiValueMap;
+    private Map<String, Map<String, String>> fromToMap;
 
-    public EsContentForJsonification(List<Map<String, String>> single,
-                                     List<Map<String, Set<String>>> multi,
-                                     List<Map<String, Map<String, String>>> fromTo) {
-        singleValueFields=single;
-        multiValueFields=multi;
-        fromToFields=fromTo;
+
+    public EsContentForJsonification(Map<String, String> singleValueMap, Map<String, Set<String>> multiValueMap, Map<String, Map<String, String>> fromToMap) {
+        this.singleValueMap = singleValueMap;
+        this.multiValueMap = multiValueMap;
+        this.fromToMap = fromToMap;
     }
-
 }

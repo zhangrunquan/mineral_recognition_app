@@ -15,16 +15,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mine.es.ViewData.EditTextData;
 import com.example.mine.es.EsContent;
+import com.example.mine.es.EsContentForJsonification;
 import com.example.mine.es.ViewData.CheckBoxData;
+import com.example.mine.es.ViewData.EditTextData;
 import com.example.mine.es.ViewData.FromToSpinnerData;
 import com.example.mine.es.ViewData.SpinnerData;
 import com.example.mine.es.ViewData.TextViewData;
 import com.example.mine.es.ViewData.ViewData;
+import com.google.gson.Gson;
 
 import java.util.List;
-
 
 import static com.example.mine.es.ViewData.DataType.CHECK_BOX_TYPE;
 import static com.example.mine.es.ViewData.DataType.EDIT_TEXT_TYPE;
@@ -135,16 +136,24 @@ public class EsAdapter extends RecyclerView.Adapter {
             mCheckBox = (CheckBox) view.findViewById(R.id.esCheckBox);
         }
 
-        public void bindDataToViews(CheckBoxData data) {
+        public void bindDataToViews(final CheckBoxData data) {
             mCheckBox.setText(data.getmText());
-            mCheckBox.setTag(data.getmFieldName());
             mCheckBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String fieldName = (String) v.getTag();
-                    String content = ((CheckBox) v).getText().toString();
-                    mEsContent.add(fieldName, content);
-                    Log.e("checkbox", mEsContent.toJson());
+                    CheckBox checkBox=(CheckBox) v;
+                    String fieldName =data.getmFieldName();
+                    String content = data.getmText();
+                    if(checkBox.isChecked()){
+                        mEsContent.add(fieldName, content);
+                    }else {
+                        mEsContent.remove(fieldName,content);
+                    }
+
+                    // TODO: 2020/1/11 删除下方测试用代码
+                    Gson gson=new Gson();
+                    EsContentForJsonification obj=mEsContent.getObjForGsonJsonification();
+                    Log.e("checkbox", gson.toJson(obj));
                 }
             });
         }

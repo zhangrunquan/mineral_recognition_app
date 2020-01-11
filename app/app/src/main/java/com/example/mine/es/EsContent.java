@@ -68,6 +68,15 @@ public class EsContent {
         }
     }
 
+    public void remove(String fieldName,String content){
+        if(multi.contains(fieldName)){
+            Set<String> set=multiValueMap.get(fieldName);
+            set.remove(content);
+            multiValueMap.put(fieldName,set);
+        }else {
+            throw new RuntimeException("Unexpected remove");
+        }
+    }
     /**
      * 是否所有字段都已有值
      */
@@ -75,9 +84,10 @@ public class EsContent {
         // TODO: 2020/1/11 通过比较字段array和Map的长度,以及遍历(fromTo)检查所有字段都已有值
         return true;
     }
-    public String toJson(){
-        Gson gson=new Gson();
-        return gson.toJson(this);
+
+    public EsContentForJsonification getObjForGsonJsonification(){
+        return new EsContentForJsonification(singleValueMap,multiValueMap,fromToMap);
     }
+
 
 }
