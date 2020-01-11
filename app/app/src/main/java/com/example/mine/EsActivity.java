@@ -16,12 +16,16 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.mine.es.EditTextData;
 import com.example.mine.es.EsContent;
-import com.example.mine.es.FromToSpinnerData;
+import com.example.mine.es.ViewData.CheckBoxData;
+import com.example.mine.es.ViewData.DataType;
+import com.example.mine.es.ViewData.EditTextData;
+import com.example.mine.es.ViewData.FromToSpinnerData;
+import com.example.mine.es.ViewData.SpinnerData;
+import com.example.mine.es.ViewData.TextViewData;
+import com.example.mine.es.ViewData.ViewData;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class EsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -44,7 +48,6 @@ public class EsActivity extends AppCompatActivity implements AdapterView.OnItemS
         spinner.setOnItemSelectedListener(this);
 
 
-
         // check box
 //        CheckBox cbox=findViewById(R.id.checkbox_meat);
 //        cbox.setOnClickListener(new View.OnClickListener() {
@@ -56,22 +59,25 @@ public class EsActivity extends AppCompatActivity implements AdapterView.OnItemS
 //        });
 
         //
-        recycler=findViewById(R.id.recycler);
-        LinearLayoutManager layoutManager=new LinearLayoutManager(this);
+        recycler = findViewById(R.id.recycler);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recycler.setLayoutManager(layoutManager);
-        List<Object> list=new ArrayList<>();
-        list.addAll(Arrays.asList(names));
-        list.add(new CheckBoxData("片状","形态"));
-        list.add(new CheckBoxData("aaa","a"));
-        list.add(new SpinnerData(adapter, "透明度"));
+        List<ViewData> list = new ArrayList<>();
 
-        list.add(new EditTextData("颜色"));
+        list.add(new TextViewData("", DataType.TEXT_TYPE, "aaa"));
 
-        list.add(new FromToSpinnerData("硬度",adapter,true));
-        list.add(new FromToSpinnerData("硬度",adapter,false));
+        list.add(new CheckBoxData("形态", DataType.CHECK_BOX_TYPE, "片状"));
+//        list.add(new CheckBoxData("aaa","a"));
 
-        EsContent esContent=new EsContent();
-        MultiCheckBoxAdapter adapter1=new MultiCheckBoxAdapter(list,esContent);
+        list.add(new SpinnerData("透明度", DataType.SPINER_TYPE, adapter));
+
+        list.add(new EditTextData("颜色", DataType.EDIT_TEXT_TYPE));
+//
+        list.add(new FromToSpinnerData("硬度", DataType.FROM_TO_SPINNER_TYPE, adapter, true));
+        list.add(new FromToSpinnerData("硬度", DataType.FROM_TO_SPINNER_TYPE, adapter, false));
+
+        EsContent esContent = new EsContent();
+        EsAdapter adapter1 = new EsAdapter(list, esContent);
         recycler.setAdapter(adapter1);
 
 

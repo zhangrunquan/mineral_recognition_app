@@ -47,7 +47,7 @@ public class EsContent {
         }else if(fromTo.contains(fieldName)){ //content应为类似 "from\tcontent" 的形式
             String[] contents=content.split("\t");
 
-            if(content.length()!=2){
+            if(contents.length!=2){
                 throw new RuntimeException(String.format("FromTo Illegal Field Num: %d",contents.length));
             }
 
