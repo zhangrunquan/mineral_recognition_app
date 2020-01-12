@@ -5,6 +5,8 @@ import com.google.gson.Gson;
 
 import org.junit.Test;
 
+import java.io.InputStream;
+
 import static org.junit.Assert.*;
 
 /**
@@ -15,9 +17,11 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
-        EsContent ec = new EsContent();
-        Gson gosn = new Gson();
-        System.out.println(gosn.toJson(ec));
+//        EsContent ec = new EsContent();
+        Gson gson = new Gson();
+//        System.out.println(gson.toJson(ec));
+
 
     }
+
 }

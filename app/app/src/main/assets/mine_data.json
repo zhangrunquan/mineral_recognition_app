@@ -1,0 +1,18 @@
+{
+  "list": [
+    {
+      "EnglishName": "crystal",
+      "images": [
+        "white/white0.png",
+        "白云石1.png"
+      ]
+    },
+    {
+      "EnglishName": "crystal2",
+      "images": [
+        "white02.png",
+        "白云石12.png"
+      ]
+    }
+  ]
+}
