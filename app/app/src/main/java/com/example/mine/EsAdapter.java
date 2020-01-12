@@ -35,7 +35,6 @@ import static com.example.mine.es.ViewData.DataType.TEXT_TYPE;
 
 public class EsAdapter extends RecyclerView.Adapter {
 
-
     private List<ViewData> mList;
     private EsContent mEsContent;
 
@@ -56,18 +55,22 @@ public class EsAdapter extends RecyclerView.Adapter {
                 View checkBoxView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.es_checkbox, parent, false);
                 return new CheckBoxViewHolder(checkBoxView);
+
             case SPINER_TYPE:
                 View spinerView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.es_spiner, parent, false);
                 return new SpinerViewHolder(spinerView);
+
             case EDIT_TEXT_TYPE:
                 View editTextView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.es_edit_text, parent, false);
                 return new EditTextHolder(editTextView);
+
             case FROM_TO_SPINNER_TYPE:
                 View fromToSpinerView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.es_spiner, parent, false);
                 return new FromToViewSpinerHolder(fromToSpinerView);
+
             default:
                 throw new RuntimeException("Invalid view type!");
         }
@@ -80,13 +83,13 @@ public class EsAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        ViewData data= (ViewData) mList.get(position);
+        ViewData data = (ViewData) mList.get(position);
         return data.getmDataType();
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ViewData data=mList.get(position);
+        ViewData data = mList.get(position);
         switch (holder.getItemViewType()) {
             case TEXT_TYPE:
                 ((TrxtViewHolder) holder).bindDataToViews((TextViewData) data);
@@ -141,18 +144,18 @@ public class EsAdapter extends RecyclerView.Adapter {
             mCheckBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    CheckBox checkBox=(CheckBox) v;
-                    String fieldName =data.getmFieldName();
+                    CheckBox checkBox = (CheckBox) v;
+                    String fieldName = data.getmFieldName();
                     String content = data.getmText();
-                    if(checkBox.isChecked()){
+                    if (checkBox.isChecked()) {
                         mEsContent.add(fieldName, content);
-                    }else {
-                        mEsContent.remove(fieldName,content);
+                    } else {
+                        mEsContent.remove(fieldName, content);
                     }
 
-                    // TODO: 2020/1/11 删除下方测试用代码
-                    Gson gson=new Gson();
-                    EsContentForJsonification obj=mEsContent.getObjForGsonJsonification();
+                    // TODO: 2020/1/11 删除下方测试用代码 点击示例中的checkbox,logcat中会显示当前Escontent对应的json
+                    Gson gson = new Gson();
+                    EsContentForJsonification obj = mEsContent.getObjForGsonJsonification();
                     Log.e("checkbox", gson.toJson(obj));
                 }
             });
@@ -170,12 +173,12 @@ public class EsAdapter extends RecyclerView.Adapter {
 
         public void bindDataToViews(final SpinnerData data) {
             mSpiner.setAdapter(data.getmAdapter());
+
             mSpiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     String content = (String) parent.getItemAtPosition(position);
                     mEsContent.add(data.getmFieldName(), content);
-
                 }
 
                 @Override
@@ -214,32 +217,6 @@ public class EsAdapter extends RecyclerView.Adapter {
             });
         }
 
-        class SpinerViewHolder extends RecyclerView.ViewHolder {
-
-            private Spinner mSpiner;
-
-            public SpinerViewHolder(View view) {
-                super(view);
-                mSpiner = (Spinner) view.findViewById(R.id.esSpiner);
-            }
-
-            public void bindDataToViews(final SpinnerData data) {
-                mSpiner.setAdapter(data.getmAdapter());
-                mSpiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        String content = (String) parent.getItemAtPosition(position);
-                        mEsContent.add(data.getmFieldName(), content);
-
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
-            }
-        }
     }
 
     class FromToViewSpinerHolder extends RecyclerView.ViewHolder {
@@ -257,13 +234,14 @@ public class EsAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     String content = (String) parent.getItemAtPosition(position);
+
                     if (data.isFrom()) {
                         content = "from\t" + content;
                     } else {
                         content = "to\t" + content;
                     }
-                    mEsContent.add(data.getmFieldName(), content);
 
+                    mEsContent.add(data.getmFieldName(), content);
                 }
 
                 @Override

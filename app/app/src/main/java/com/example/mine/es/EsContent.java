@@ -1,11 +1,11 @@
 package com.example.mine.es;
 
-import com.google.gson.Gson;
+import com.example.mine.mineinfo.MineInfo;
 
-import java.io.FileInputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -29,65 +29,65 @@ public class EsContent {
         singleValueMap = new HashMap<>();
         multiValueMap = new HashMap<>();
         fromToMap = new HashMap<>();
-
     }
 
-    public void add(String fieldName,String content){
-        if(single.contains(fieldName)){
-            singleValueMap.put(fieldName,content);
-        }else if (multi.contains(fieldName)){
-            Set<String> set=multiValueMap.get(fieldName);
-            if(set==null){
-                set=new HashSet<>();
+    public void add(String fieldName, String content) {
+        if (single.contains(fieldName)) {
+            singleValueMap.put(fieldName, content);
+        } else if (multi.contains(fieldName)) {
+            Set<String> set = multiValueMap.get(fieldName);
+
+            if (set == null) {
+                set = new HashSet<>();
                 set.add(content);
-                multiValueMap.put(fieldName,set);
-            }else {
+                multiValueMap.put(fieldName, set);
+            } else {
                 set.add(content);
             }
-        }else if(fromTo.contains(fieldName)){ //content应为类似 "from\tcontent" 的形式
-            String[] contents=content.split("\t");
+        } else if (fromTo.contains(fieldName)) { //content应为类似 "from\tcontent" 的形式
+            String[] contents = content.split("\t");
 
-            if(contents.length!=2){
-                throw new RuntimeException(String.format("FromTo Illegal Field Num: %d",contents.length));
+            if (contents.length != 2) {
+                throw new RuntimeException(String.format("FromTo Illegal Field Num: %d", contents.length));
             }
 
-            Map<String,String> map=fromToMap.get(fieldName);
-            if (map==null){
-                map=new HashMap<>();
-                map.put(contents[0],contents[1]);
-                fromToMap.put(fieldName,map);
-            }else {
-                map.put(contents[0],contents[1]);
-                fromToMap.put(fieldName,map);
+            Map<String, String> map = fromToMap.get(fieldName);
+            if (map == null) {
+                map = new HashMap<>();
+                map.put(contents[0], contents[1]);
+                fromToMap.put(fieldName, map);
+            } else {
+                map.put(contents[0], contents[1]);
+                fromToMap.put(fieldName, map);
             }
 
-        }else {
-            String msg=String.format("Illegal fieldName: %s",fieldName);
+        } else {
+            String msg = String.format("Illegal fieldName: %s", fieldName);
 
             throw new RuntimeException(msg);
         }
     }
 
-    public void remove(String fieldName,String content){
-        if(multi.contains(fieldName)){
-            Set<String> set=multiValueMap.get(fieldName);
+    public void remove(String fieldName, String content) {
+        if (multi.contains(fieldName)) {
+            Set<String> set = multiValueMap.get(fieldName);
             set.remove(content);
-            multiValueMap.put(fieldName,set);
-        }else {
+            multiValueMap.put(fieldName, set);
+        } else {
             throw new RuntimeException("Unexpected remove");
         }
     }
+
     /**
      * 是否所有字段都已有值
      */
-    public boolean allFilled(){
+    public boolean allFilled() {
         // TODO: 2020/1/11 通过比较字段array和Map的长度,以及遍历(fromTo)检查所有字段都已有值
         return true;
     }
 
-    public EsContentForJsonification getObjForGsonJsonification(){
-        return new EsContentForJsonification(singleValueMap,multiValueMap,fromToMap);
+    public EsContentForJsonification getObjForGsonJsonification() {
+        return new EsContentForJsonification(singleValueMap, multiValueMap, fromToMap);
     }
-
 
 }

@@ -13,36 +13,40 @@ import java.util.Map;
 
 public class MineInfoManager {
 
-    private Map<String,MineInfo> map;
+    private Map<String, MineInfo> map;
 
-    public MineInfoManager(Context context){
-        map=load(context);
+    public MineInfoManager(Context context) {
+        map = load(context);
     }
 
-    public MineInfo getMineInfo(String key){
+    public MineInfo getMineInfo(String key) {
         return map.get(key);
     }
 
-    private Map<String,MineInfo> load(Context context){
-        BufferedReader reader=null;
-        try{
-            reader=new BufferedReader(
+    private Map<String, MineInfo> load(Context context) {
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(
                     new InputStreamReader(context.getAssets().open("mine_data.json"))
             );
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        Gson gson=new Gson();
-        MineInfoList mineInfoList=gson.fromJson(reader,MineInfoList.class);
+        Gson gson = new Gson();
+        MineInfoList mineInfoList = gson.fromJson(reader, MineInfoList.class);
 
-        List<MineInfo> list=mineInfoList.getList();
+        List<MineInfo> list = mineInfoList.getList();
 
-        Map<String,MineInfo> map=new HashMap<>();
-        for(MineInfo mineInfo:list){
-            map.put(mineInfo.EnglishName,mineInfo);
+        Map<String, MineInfo> map = new HashMap<>();
+        for (MineInfo mineInfo : list) {
+            map.put(mineInfo.EnglishName, mineInfo);
         }
         return map;
+    }
+
+    public List<MineInfo> filter() {
+        return null;
     }
 
 }
