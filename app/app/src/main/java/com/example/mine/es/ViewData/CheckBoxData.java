@@ -1,6 +1,6 @@
 package com.example.mine.es.ViewData;
 
-public class CheckBoxData extends ViewData {
+public class CheckBoxData extends EsViewData {
     private String mText;
 
 

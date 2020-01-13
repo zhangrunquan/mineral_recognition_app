@@ -1,4 +1,4 @@
-package com.example.mine.es.ViewData;
+package com.example.mine.ViewData;
 
 public class DataType {
     public static final int TEXT_TYPE = 1;
@@ -6,4 +6,5 @@ public class DataType {
     public static final int SPINER_TYPE = 3;
     public static final int EDIT_TEXT_TYPE = 4;
     public static final int FROM_TO_SPINNER_TYPE = 5;
+    public static final int  P6_CARD_VIEW_DATA=6;
 }

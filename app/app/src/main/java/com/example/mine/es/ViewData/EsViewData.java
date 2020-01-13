@@ -1,11 +1,11 @@
 package com.example.mine.es.ViewData;
 
-public class ViewData {
+public class EsViewData {
     private String mFieldName;
     private int mDataType;
 
 
-    ViewData(String mFieldName, int mDataType) {
+    public EsViewData(String mFieldName, int mDataType) {
         this.mFieldName = mFieldName;
         this.mDataType = mDataType;
     }

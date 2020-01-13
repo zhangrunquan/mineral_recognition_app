@@ -3,6 +3,7 @@ package com.example.mine;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import com.example.mine.network.UploadStringService;
 import com.google.gson.Gson;
 
 import java.io.InputStream;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -67,6 +69,18 @@ public class MineInfoActivity extends AppCompatActivity {
                 t.printStackTrace();
             }
         });
+
+
+        // MineInfoManager搜索特定类别示例
+        List<MineInfo> infoList= manager.filter(new MineInfoManager.MineInfoFilter() {
+
+            @Override
+            public boolean filter(MineInfo mineInfo) {
+                return mineInfo.EnglishName.equals("crystal");
+            }
+        });
+
+        Log.e("MineInfoManager搜索特定类别示例" ,infoList.toString());
     }
 
 }

@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,8 +46,20 @@ public class MineInfoManager {
         return map;
     }
 
-    public List<MineInfo> filter() {
-        return null;
+    public abstract static class MineInfoFilter{
+        public abstract boolean filter(MineInfo mineInfo);
     }
 
+    //MineInfoFilter返回true的元素会放在列表中返回
+    public List<MineInfo> filter(MineInfoFilter mineInfoFilter){
+        List<MineInfo> list=new ArrayList<>();
+
+        for(MineInfo mineInfo:map.values()){
+            if(mineInfoFilter.filter(mineInfo)){
+                list.add(mineInfo);
+            }
+        }
+
+        return list;
+    }
 }

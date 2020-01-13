@@ -1,4 +1,4 @@
-package com.example.mine;
+package com.example.mine.es;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,27 +15,26 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mine.es.EsContent;
-import com.example.mine.es.EsContentForJsonification;
+import com.example.mine.R;
 import com.example.mine.es.ViewData.CheckBoxData;
 import com.example.mine.es.ViewData.EditTextData;
 import com.example.mine.es.ViewData.FromToSpinnerData;
 import com.example.mine.es.ViewData.SpinnerData;
 import com.example.mine.es.ViewData.TextViewData;
-import com.example.mine.es.ViewData.ViewData;
+import com.example.mine.es.ViewData.EsViewData;
 import com.google.gson.Gson;
 
 import java.util.List;
 
-import static com.example.mine.es.ViewData.DataType.CHECK_BOX_TYPE;
-import static com.example.mine.es.ViewData.DataType.EDIT_TEXT_TYPE;
-import static com.example.mine.es.ViewData.DataType.FROM_TO_SPINNER_TYPE;
-import static com.example.mine.es.ViewData.DataType.SPINER_TYPE;
-import static com.example.mine.es.ViewData.DataType.TEXT_TYPE;
+import static com.example.mine.ViewData.DataType.CHECK_BOX_TYPE;
+import static com.example.mine.ViewData.DataType.EDIT_TEXT_TYPE;
+import static com.example.mine.ViewData.DataType.FROM_TO_SPINNER_TYPE;
+import static com.example.mine.ViewData.DataType.SPINER_TYPE;
+import static com.example.mine.ViewData.DataType.TEXT_TYPE;
 
 public class EsAdapter extends RecyclerView.Adapter {
 
-    private List<ViewData> mList;
+    private List<EsViewData> mList;
     private EsContent mEsContent;
 
     public EsContent getmEsContent() {
@@ -76,20 +75,20 @@ public class EsAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public EsAdapter(List<ViewData> list, EsContent esContent) {
+    public EsAdapter(List<EsViewData> list, EsContent esContent) {
         mList = list;
         mEsContent = esContent;
     }
 
     @Override
     public int getItemViewType(int position) {
-        ViewData data = (ViewData) mList.get(position);
+        EsViewData data = (EsViewData) mList.get(position);
         return data.getmDataType();
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ViewData data = mList.get(position);
+        EsViewData data = mList.get(position);
         switch (holder.getItemViewType()) {
             case TEXT_TYPE:
                 ((TrxtViewHolder) holder).bindDataToViews((TextViewData) data);

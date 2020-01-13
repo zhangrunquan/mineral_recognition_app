@@ -1,11 +1,12 @@
 package com.example.mine;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -14,9 +15,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mine.network.MineTypeResponse;
 import com.example.mine.network.RetrofitClientInstance;
@@ -34,77 +32,116 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+public class P3Activity extends AppCompatActivity {
 
-public class MainActivity extends AppCompatActivity {
+    private static final int REQUEST_CODE_CAMERA = 1;
+    private static final int REQUEST_CODE_SELECT_FILE = 2;
 
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-    static final int REQUEST_CODE_SELECT_FILE = 2;
     static final String TMP_PHOTO = "tmp_photo.jpg";
-    private ImageView picture;
-    private Button but;
+
+    private ImageView userImage;
+    private ImageView infoImage;
+
+    private TextView mineTypeText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        picture = findViewById(R.id.pic);
+        setContentView(R.layout.activity_p3);
 
-        but = findViewById(R.id.button);
-        but.setOnClickListener(new View.OnClickListener() {
+        Button butBack = findViewById(R.id.p3Back);
+        butBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
+            }
+        });
 
-                // 测试相机拍摄,显示,上传图片
+        Button butTakePhoto = findViewById(R.id.p3ButtonTakeMorePhoto);
+        butTakePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 dispatchTakePictureIntent();
-
-                // 测试图库选择图片,显示,上传
-//        choosePhoto();
             }
         });
 
-        Button but2 = findViewById(R.id.mainButton1);
-        but2.setOnClickListener(new View.OnClickListener() {
+        Button butExperiment = findViewById(R.id.p3ButtonExperiment);
+        butExperiment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MineInfoActivity.class);
-                startActivity(intent);
+                ActivityCommon.goToExperiment(P3Activity.this);
             }
         });
 
-        Button but3=findViewById(R.id.mainButton2);
-        but3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-//                startActivity(intent);
-                ActivityCommon.goToHomePage(MainActivity.this);
-            }
-        });
-    }
+        // 根据收到的信息决定行为
+        int actionCode = getIntent().getIntExtra("action", -1);
 
-
-    // 用户选择一张已有图片
-    public void chooseExistedPicture() {
-        Intent intent = new Intent()
-                .setType("*/*")
-                .setAction(Intent.ACTION_GET_CONTENT);
-
-        startActivityForResult(Intent.createChooser(intent, "Select a picture")
-                , REQUEST_CODE_SELECT_FILE);
-    }
-
-    // 调用相机拍照
-    public void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        switch (actionCode) {
+            case ActivityCommon.ACTION_TAKE_PHOTO:
+                butTakePhoto.callOnClick();
+                break;
+            case ActivityCommon.ACTION_CHOOSE_PHOTO:
+                choosePhoto();
+                break;
+            default:
+                throw new RuntimeException("Illegal action code");
         }
+
+        userImage = findViewById(R.id.p3UserImage);
+        infoImage = findViewById(R.id.p3InfoImage);
+
+        mineTypeText = findViewById(R.id.p3MineType);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
+            case REQUEST_CODE_CAMERA: //相机
+                if (resultCode == RESULT_OK) {
+                    Bundle extras = data.getExtras();
+                    Bitmap imageBitmap = (Bitmap) extras.get("data");
+
+                    // 显示图片
+                    userImage.setImageBitmap(imageBitmap);
+
+
+                    // bitmap保存为jpg格式的文件
+                    saveBitmapToFile(imageBitmap, TMP_PHOTO, Bitmap.CompressFormat.JPEG, 100);
+
+                    // 将文件读入为base64编码的字符串
+                    String picture = null;
+
+                    try {
+                        picture = inputStreamToString(openFileInput(TMP_PHOTO));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                    // 上传图片
+                    RequestBody requestFile =
+                            RequestBody.create(MediaType.parse("image/jpg"), picture);
+
+                    MultipartBody.Part body =
+                            MultipartBody.Part.createFormData("image", TMP_PHOTO, requestFile);
+
+                    UploadFileService service = RetrofitClientInstance.getRetrofitInstance().create(UploadFileService.class);
+                    Call<MineTypeResponse> call = service.uploadFile(body);
+
+                    call.enqueue(new Callback<MineTypeResponse>() {
+                        @Override
+                        public void onResponse(Call<MineTypeResponse> call, Response<MineTypeResponse> response) {
+                            String result = response.body().getType();
+//                            TextView textView = (TextView) findViewById(R.id.mainTextView);
+                            mineTypeText.setText(result);
+                        }
+
+                        @Override
+                        public void onFailure(Call<MineTypeResponse> call, Throwable t) {
+                            t.printStackTrace();
+                        }
+                    });
+                }
+                break;
             case REQUEST_CODE_SELECT_FILE: //选择图片
                 if (resultCode == RESULT_OK) {
                     Uri uri = data.getData();
@@ -118,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
                     // 显示图片
                     try {
                         Bitmap bm = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-                        picture.setImageBitmap(bm);
+                        userImage.setImageBitmap(bm);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -146,8 +183,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(Call<MineTypeResponse> call, Response<MineTypeResponse> response) {
                                 String result = response.body().getType();
-                                TextView textView = (TextView) findViewById(R.id.mainTextView);
-                                textView.setText(result);
+                                mineTypeText.setText(result);
                             }
 
                             @Override
@@ -161,53 +197,17 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 break;
-
-            case REQUEST_IMAGE_CAPTURE: //相机
-                if (resultCode == RESULT_OK) {
-                    Bundle extras = data.getExtras();
-                    Bitmap imageBitmap = (Bitmap) extras.get("data");
-
-                    // bitmap保存为jpg格式的文件
-                    saveBitmapToFile(imageBitmap, TMP_PHOTO, Bitmap.CompressFormat.JPEG, 100);
-                    picture.setImageBitmap(imageBitmap);
-
-                    String picture = null;
-
-                    try {
-                        picture = inputStreamToString(openFileInput(TMP_PHOTO));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-
-                    // 上传图片
-                    RequestBody requestFile =
-                            RequestBody.create(MediaType.parse("image/jpg"), picture);
-
-                    MultipartBody.Part body =
-                            MultipartBody.Part.createFormData("image", TMP_PHOTO, requestFile);
-
-                    UploadFileService service = RetrofitClientInstance.getRetrofitInstance().create(UploadFileService.class);
-                    Call<MineTypeResponse> call = service.uploadFile(body);
-
-                    call.enqueue(new Callback<MineTypeResponse>() {
-                        @Override
-                        public void onResponse(Call<MineTypeResponse> call, Response<MineTypeResponse> response) {
-                            String result = response.body().getType();
-                            TextView textView = (TextView) findViewById(R.id.mainTextView);
-                            textView.setText(result);
-                        }
-
-                        @Override
-                        public void onFailure(Call<MineTypeResponse> call, Throwable t) {
-                            t.printStackTrace();
-                        }
-                    });
-                }
-                break;
             default:
                 break;
         }
+    }
 
+    // 调用相机拍照
+    public void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_CODE_CAMERA);
+        }
     }
 
     // 将bitmap保存到文件
@@ -215,10 +215,23 @@ public class MainActivity extends AppCompatActivity {
         try {
             FileOutputStream out = openFileOutput(fileName, Context.MODE_PRIVATE);
             Boolean flag = bitmap.compress(format, quality, out);
+            out.close();
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
+    }
+
+    // 用户选择一张已有图片
+    public void choosePhoto() {
+        Intent intent = new Intent()
+                .setType("*/*")
+                .setAction(Intent.ACTION_GET_CONTENT);
+
+        startActivityForResult(Intent.createChooser(intent, "Select a picture")
+                , REQUEST_CODE_SELECT_FILE);
     }
 
     String inputStreamToString(InputStream in) {
@@ -236,5 +249,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return content;
     }
-
 }

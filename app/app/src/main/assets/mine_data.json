@@ -4,15 +4,20 @@
       "EnglishName": "crystal",
       "images": [
         "white/white0.png",
-        "白云石1.png"
-      ]
+        "white/white1.png",
+        "white/white2.png",
+        "white/white3.png",
+        "white/white4.png"
+      ],
+      "chemistry": "oh"
     },
     {
       "EnglishName": "crystal2",
       "images": [
-        "white02.png",
+        "white/white1.png",
         "白云石12.png"
-      ]
+      ],
+      "chemistry": "oh"
     }
   ]
 }

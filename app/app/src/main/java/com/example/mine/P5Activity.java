@@ -1,12 +1,12 @@
 package com.example.mine;
 
-import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.example.mine.es.EsAdapter;
 import com.example.mine.es.EsContent;
@@ -21,7 +21,7 @@ import com.example.mine.es.ViewData.EsViewData;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EsActivity extends AppCompatActivity {
+public class P5Activity extends AppCompatActivity {
 
     private RecyclerView recycler;
 
@@ -64,5 +64,4 @@ public class EsActivity extends AppCompatActivity {
         recycler.setAdapter(adapter1);
 
     }
-
 }

@@ -2,7 +2,7 @@ package com.example.mine.es.ViewData;
 
 import android.widget.ArrayAdapter;
 
-public class SpinnerData extends ViewData {
+public class SpinnerData extends EsViewData {
     private ArrayAdapter<CharSequence> mAdapter;
 
 
