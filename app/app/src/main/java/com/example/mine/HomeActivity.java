@@ -3,8 +3,11 @@ package com.example.mine;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -44,5 +47,17 @@ public class HomeActivity extends AppCompatActivity {
                 ActivityCommon.goToSomeKind(HomeActivity.this);
             }
         });
+
+        final EditText editText=findViewById(R.id.homeEditText);
+
+        Button butSearch=findViewById(R.id.homeSearch);
+        butSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String keyword=editText.getText().toString();
+                ActivityCommon.goToInfoPage(HomeActivity.this,keyword);
+            }
+        });
+
     }
 }

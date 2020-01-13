@@ -7,4 +7,7 @@ public class DataType {
     public static final int EDIT_TEXT_TYPE = 4;
     public static final int FROM_TO_SPINNER_TYPE = 5;
     public static final int  P6_CARD_VIEW_DATA=6;
+    public static final int P4_IMAGE_RECYCLER_TYPE=7;
+    public static final int P4_TEXT_TYPE=8;
+    public static final int P4_IMAGE_TYPE=9;
 }

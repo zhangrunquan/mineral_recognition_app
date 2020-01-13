@@ -1,4 +1,4 @@
-package com.example.mine.p6;
+package com.example.mine.p4;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,16 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mine.MyViewHolder.MyViewHolder;
 import com.example.mine.R;
 import com.example.mine.ViewData.ViewData;
-import com.example.mine.es.ViewData.EsViewData;
+import com.example.mine.p6.P6CardViewHolder;
 
 import java.util.List;
 
+import static com.example.mine.ViewData.DataType.P4_IMAGE_RECYCLER_TYPE;
 import static com.example.mine.ViewData.DataType.P6_CARD_VIEW_DATA;
 
-public class P6RecyclerAdapter  extends RecyclerView.Adapter {
+public class P4MainRecyclerAdapter extends RecyclerView.Adapter{
     private List<ViewData> mList;
 
-    public P6RecyclerAdapter(List<ViewData> list) {
+    public P4MainRecyclerAdapter(List<ViewData> list) {
         mList = list;
     }
 
@@ -33,10 +34,10 @@ public class P6RecyclerAdapter  extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         switch (viewType) {
-            case P6_CARD_VIEW_DATA:
+            case P4_IMAGE_RECYCLER_TYPE:
                 View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.p6_card, parent, false);
-                return new P6CardViewHolder(view);
+                        .inflate(R.layout.p4_image_recycler, parent, false);
+                return new P4ImageRecylerHolder(view);
 
             default:
                 throw new RuntimeException("Invalid view type!");
@@ -47,7 +48,7 @@ public class P6RecyclerAdapter  extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ViewData data = mList.get(position);
         switch (holder.getItemViewType()) {
-            case P6_CARD_VIEW_DATA:
+            case P4_IMAGE_RECYCLER_TYPE:
                 ((MyViewHolder) holder).bindDataToViews(data);
                 break;
             default:
@@ -59,5 +60,4 @@ public class P6RecyclerAdapter  extends RecyclerView.Adapter {
     public int getItemCount() {
         return mList.size();
     }
-
 }

@@ -41,4 +41,10 @@ public class ActivityCommon {
         Intent intent = new Intent(context, P6Activity.class);
         context.startActivity(intent);
     }
+
+    public static void goToInfoPage(Context context,String mineName){
+        Intent intent = new Intent(context, P4Activity.class);
+        intent.putExtra("mineName",mineName);
+        context.startActivity(intent);
+    }
 }
