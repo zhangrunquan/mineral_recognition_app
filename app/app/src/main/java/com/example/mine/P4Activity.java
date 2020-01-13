@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import com.example.mine.ViewData.DataType;
 import com.example.mine.ViewData.ViewData;
@@ -15,9 +16,12 @@ import com.example.mine.p4.P4ImageData;
 import com.example.mine.p4.P4ImageRecyclerAdapter;
 import com.example.mine.p4.P4ImageRecyclerData;
 import com.example.mine.p4.P4MainRecyclerAdapter;
+import com.example.mine.p4.P4TextData;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class P4Activity extends AppCompatActivity {
 
@@ -47,8 +51,12 @@ public class P4Activity extends AppCompatActivity {
         // 构造MainRecycler的adapter
         List<ViewData> dataList=new ArrayList<>();
 
-        dataList.add(imageRecyclerData);
+        // 添加textData
+        Map<String,String> textMap=new HashMap<>();
+        textMap.put("mineName",mineName);
+        dataList.add(new P4TextData(DataType.P4_TEXT_TYPE,textMap));
 
+        dataList.add(imageRecyclerData);
 
         mainRecycler=findViewById(R.id.p4MainRecycler);
 
@@ -56,5 +64,31 @@ public class P4Activity extends AppCompatActivity {
         mainRecycler.setLayoutManager(layoutManager);
         mainRecycler.setAdapter(new P4MainRecyclerAdapter(dataList));
 
+
+        // 注册button功能
+
+        Button butTakePhoto=findViewById(R.id.p4ButtonTakeMorePhoto);
+        butTakePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityCommon.goToTakePhoto(P4Activity.this);
+            }
+        });
+
+        Button butExperiment=findViewById(R.id.p4ButtonExperiment);
+        butExperiment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityCommon.goToExperiment(P4Activity.this);
+            }
+        });
+
+        Button butBack = findViewById(R.id.p4ButtonBack);
+        butBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }

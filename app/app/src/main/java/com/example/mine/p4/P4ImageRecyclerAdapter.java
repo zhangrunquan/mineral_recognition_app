@@ -13,7 +13,6 @@ import com.example.mine.ViewData.ViewData;
 
 import java.util.List;
 
-import static com.example.mine.ViewData.DataType.P4_IMAGE_RECYCLER_TYPE;
 import static com.example.mine.ViewData.DataType.P4_IMAGE_TYPE;
 
 public class P4ImageRecyclerAdapter extends ViewDataAdapter {

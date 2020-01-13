@@ -2,8 +2,6 @@ package com.example.mine.p4;
 
 import android.content.Context;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.mine.ViewData.ViewData;
 
 public class P4ImageRecyclerData extends ViewData {
