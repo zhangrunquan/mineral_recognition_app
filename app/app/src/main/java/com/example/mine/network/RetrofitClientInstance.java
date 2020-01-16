@@ -8,7 +8,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClientInstance {
     private static Retrofit retrofit;
-    private static final String BASE_URL_API = "https:192.168.0.107:5000/";
+//    private static final String BASE_URL_API = "https:192.168.0.107:5000/";
+//    private static final String BASE_URL_API = "https:192.168.0.107:10020/";
+
+    private static final String BASE_URL_API = "https:47.101.151.73:10020/";
 
     public static Retrofit getRetrofitInstance() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
