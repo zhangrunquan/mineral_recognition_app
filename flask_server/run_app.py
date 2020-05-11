@@ -1,3 +1,5 @@
+#encoding=utf-8
+
 from __init__ import create_app
 
 if __name__ == "__main__":
