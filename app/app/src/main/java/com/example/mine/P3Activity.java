@@ -1,11 +1,14 @@
 package com.example.mine;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -19,6 +22,8 @@ import android.widget.TextView;
 import com.example.mine.network.MineTypeResponse;
 import com.example.mine.network.RetrofitClientInstance;
 import com.example.mine.network.UploadFileService;
+import com.example.mine.ui.camera.CameraFragment;
+import com.example.mine.ui.experiment.ExperimentFragment;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -33,7 +38,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class P3Activity extends AppCompatActivity {
-
     private static final int REQUEST_CODE_CAMERA = 1;
     private static final int REQUEST_CODE_SELECT_FILE = 2;
 
@@ -48,14 +52,14 @@ public class P3Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_p3);
-
-        Button butBack = findViewById(R.id.p3Back);
-        butBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+//
+//        Button butBack = findViewById(R.id.p3Back);
+//        butBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
 
         Button butTakePhoto = findViewById(R.id.p3ButtonTakeMorePhoto);
         butTakePhoto.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +73,8 @@ public class P3Activity extends AppCompatActivity {
         butExperiment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityCommon.goToExperiment(P3Activity.this);
+//                ActivityCommon.goToExperiment(P3Activity.this);
+                changeToExperimentFragment();
             }
         });
 
@@ -89,10 +94,18 @@ public class P3Activity extends AppCompatActivity {
 
         userImage = findViewById(R.id.p3UserImage);
         infoImage = findViewById(R.id.p3InfoImage);
-
+        Resources resources = getBaseContext().getResources();
+        Drawable imageDrawable = resources.getDrawable(R.drawable.circle2); //图片在drawable文件夹下
+        infoImage.setBackgroundDrawable(imageDrawable);
         mineTypeText = findViewById(R.id.p3MineType);
     }
-
+    private void changeToExperimentFragment(){
+        //如果是用的v4的包，则用getActivity().getSuppoutFragmentManager();
+        FragmentManager fm = getSupportFragmentManager();
+        //注意v4包的配套使用
+        ExperimentFragment fragment = new ExperimentFragment();
+        fm.beginTransaction().replace(this.getTaskId(),fragment).addToBackStack(null).commit();
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -16,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mine.R;
+import com.example.mine.es.ViewData.ButtonData;
 import com.example.mine.es.ViewData.CheckBoxData;
 import com.example.mine.es.ViewData.EditTextData;
 import com.example.mine.es.ViewData.FromToSpinnerData;
@@ -26,6 +28,7 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
+import static com.example.mine.ViewData.DataType.BUTTON_TYPE;
 import static com.example.mine.ViewData.DataType.CHECK_BOX_TYPE;
 import static com.example.mine.ViewData.DataType.EDIT_TEXT_TYPE;
 import static com.example.mine.ViewData.DataType.FROM_TO_SPINNER_TYPE;
@@ -49,7 +52,10 @@ public class EsAdapter extends RecyclerView.Adapter {
                 View view = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.es_text, parent, false);
                 return new TrxtViewHolder(view);
-
+            case BUTTON_TYPE:
+                View buttonview = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.ex_button, parent, false);
+                return new ButtonHolder(buttonview);
             case CHECK_BOX_TYPE:
                 View checkBoxView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.es_checkbox, parent, false);
@@ -93,6 +99,9 @@ public class EsAdapter extends RecyclerView.Adapter {
             case TEXT_TYPE:
                 ((TrxtViewHolder) holder).bindDataToViews((TextViewData) data);
                 break;
+            case BUTTON_TYPE:
+                ((ButtonHolder) holder).bindDataToViews((ButtonData) data);
+                break;
             case CHECK_BOX_TYPE:
                 ((CheckBoxViewHolder) holder).bindDataToViews((CheckBoxData) data);
                 break;
@@ -129,15 +138,42 @@ public class EsAdapter extends RecyclerView.Adapter {
         }
     }
 
+    class ButtonHolder extends RecyclerView.ViewHolder {
+
+        private Button mButtonView;
+
+        public ButtonHolder(View view) {
+            super(view);
+            mButtonView = (Button) view.findViewById(R.id.esButtonView);
+        }
+
+        public void bindDataToViews(final ButtonData data) {
+            mButtonView.setText(data.getmText());
+            mButtonView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    Button thebutton = (Button) v;
+//                    EsViewData toshow = data.getesViewData();
+//                    switch (toshow.getmDataType()){
+//                        case CHECK_BOX_TYPE:
+//                            (CheckBoxData)toshow.getView(View.GONE);
+//                    }
+//
+//                    String content = data.getmText();
+                }
+            });
+        }
+    }
     class CheckBoxViewHolder extends RecyclerView.ViewHolder {
 
         private CheckBox mCheckBox;
-
         public CheckBoxViewHolder(View view) {
             super(view);
             mCheckBox = (CheckBox) view.findViewById(R.id.esCheckBox);
         }
-
+        public View getView(){
+            return mCheckBox;
+        }
         public void bindDataToViews(final CheckBoxData data) {
             mCheckBox.setText(data.getmText());
             mCheckBox.setOnClickListener(new View.OnClickListener() {
@@ -169,7 +205,9 @@ public class EsAdapter extends RecyclerView.Adapter {
             super(view);
             mSpiner = (Spinner) view.findViewById(R.id.esSpiner);
         }
-
+        public View getView(){
+            return mSpiner;
+        }
         public void bindDataToViews(final SpinnerData data) {
             mSpiner.setAdapter(data.getmAdapter());
 
@@ -192,12 +230,16 @@ public class EsAdapter extends RecyclerView.Adapter {
 
         private EditText mEditText;
 
+
         public EditTextHolder(View view) {
             super(view);
             mEditText = (EditText) view.findViewById(R.id.esEditText);
         }
-
+        public View getView(){
+            return mEditText;
+        }
         public void bindDataToViews(final EditTextData data) {
+            mEditText.setHint(data.gethint());
             mEditText.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -222,11 +264,14 @@ public class EsAdapter extends RecyclerView.Adapter {
 
         private Spinner mSpiner;
 
+
         public FromToViewSpinerHolder(View view) {
             super(view);
             mSpiner = (Spinner) view.findViewById(R.id.esSpiner);
         }
-
+        public View getView(){
+            return mSpiner;
+        }
         public void bindDataToViews(final FromToSpinnerData data) {
             mSpiner.setAdapter(data.getmAdapter());
             mSpiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

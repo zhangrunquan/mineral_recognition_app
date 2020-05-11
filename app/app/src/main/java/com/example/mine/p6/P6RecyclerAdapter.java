@@ -1,5 +1,6 @@
 package com.example.mine.p6;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ public class P6RecyclerAdapter  extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        Log.d("P6RecyclerAdapter", String.format("whatistheposition%d", position));
         ViewData data = mList.get(position);
         switch (holder.getItemViewType()) {
             case P6_CARD_VIEW_DATA:

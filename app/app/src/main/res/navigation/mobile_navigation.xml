@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_category">
+
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_home"-->
+<!--        android:name="com.example.mine.ui.home.HomeFragment"-->
+<!--        android:label="@string/title_home"-->
+<!--        tools:layout="@layout/fragment_home" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_dashboard"-->
+<!--        android:name="com.example.mine.ui.dashboard.DashboardFragment"-->
+<!--        android:label="@string/title_dashboard"-->
+<!--        tools:layout="@layout/fragment_dashboard" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_notifications"-->
+<!--        android:name="com.example.mine.ui.notifications.NotificationsFragment"-->
+<!--        android:label="@string/title_notifications"-->
+<!--        tools:layout="@layout/fragment_notifications" />-->
+    <fragment
+        android:id="@+id/navigation_category"
+        android:name="com.example.mine.ui.home.HomeFragment"
+        android:label="@string/category"
+        tools:layout="@layout/activity_home" />
+
+    <fragment
+        android:id="@+id/navigation_camera"
+        android:name="com.example.mine.ui.camera.CameraFragment"
+        android:label="@string/camera"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_experiment"
+        android:name="com.example.mine.ui.experiment.ExperimentFragment"
+        android:label="@string/experiment"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_mine"
+        android:name="com.example.mine.ui.home.HomeFragment"
+        android:label="@string/mine"
+        tools:layout="@layout/fragment_home" />
+</navigation>

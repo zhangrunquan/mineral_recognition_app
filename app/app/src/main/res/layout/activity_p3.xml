@@ -4,26 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_below="@id/p3InfoImage2"
     tools:context=".P3Activity">
 
     <ImageView
         android:id="@+id/p3UserImage"
         android:layout_width="230dp"
         android:layout_height="177dp"
-        android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/logo" />
 
+    <!--    <Button-->
+<!--        android:id="@+id/p3Back"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginLeft="16dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:text="back"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
     <ImageView
         android:id="@+id/p3InfoImage"
         android:layout_width="169dp"
         android:layout_height="163dp"
-        android:layout_marginStart="120dp"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginLeft="108dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/p3UserImage"
+        android:background="@drawable/circle5"
+        app:srcCompat="@mipmap/logo" />
+
+    <ImageView
+        android:id="@+id/p3InfoImage2"
+        android:layout_width="169dp"
+        android:layout_height="163dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginLeft="108dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintLeft_toRightOf="@+id/p3UserImage"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/p3UserImage"
         app:srcCompat="@mipmap/logo" />
@@ -32,64 +57,62 @@
         android:id="@+id/p3ButtonTakeMorePhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="84dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/btn_selector"
         android:text="再拍一张"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/p3ButtonExperiment"
-        app:layout_constraintHorizontal_bias="0.361"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/p3ButtonExperiment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="72dp"
-        android:layout_marginRight="72dp"
-        android:layout_marginBottom="84dp"
-        android:text="做实验"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/p3ButtonMoreInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="160dp"
-        android:layout_marginRight="160dp"
-        android:layout_marginBottom="152dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/btn_selector"
         android:text="更多信息"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintHorizontal_weight="0.4"
+        app:layout_constraintStart_toEndOf="@+id/p3ButtonTakeMorePhoto" />
 
     <Button
-        android:id="@+id/p3Back"
+        android:id="@+id/p3ButtonExperiment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:text="back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/btn_selector"
+        android:text="做实验"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/p3MineType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="种类"
+        android:text="无此矿石"
+        android:textSize="38dp"
         app:layout_constraintBottom_toTopOf="@+id/p3InfoImage"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/p3UserImage"
-        app:layout_constraintVertical_bias="0.152" />
+        app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="相似度"
-        app:layout_constraintBottom_toTopOf="@+id/p3InfoImage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/p3MineType" />
+    <!--    <TextView-->
+<!--        android:id="@+id/textView2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="相似度"-->
+<!--        android:textSize="33dp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/p3InfoImage"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/p3MineType" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,10 +11,13 @@ import java.util.Set;
 
 public class EsContent {
 
-    private static String[] singleValues = {"颜色", "透明度"};
-    private static String[] multiValues = {"形态"};
-    private static String[] fromToValues = {"硬度"};
+    private static String[] singleValues = {"颜色", "形态","条痕", "透明度","弹性或挠性","磁性","发光性","滑腻感","染手","硬度","比重"};//输入的或者单选的
+    private static String[] multiValues = {"光泽","解理","断口"};//多选的
+//    private static String[] fromToValues = {};//从a到b的
 
+//    private static String[] singleValues = {"颜色", "形态","条痕"};
+//    private static String[] multiValues = {"光泽","透明度","解理","断口","弹性或挠性"};
+//    private static String[] fromToValues = {"硬度","比重"};
     private Set<String> single, multi, fromTo;
 
     private Map<String, String> singleValueMap;
@@ -24,7 +27,7 @@ public class EsContent {
     public EsContent() {
         single = new HashSet<String>(Arrays.asList(singleValues));
         multi = new HashSet<String>(Arrays.asList(multiValues));
-        fromTo = new HashSet<String>(Arrays.asList(fromToValues));
+//        fromTo = new HashSet<String>(Arrays.asList(fromToValues));
 
         singleValueMap = new HashMap<>();
         multiValueMap = new HashMap<>();

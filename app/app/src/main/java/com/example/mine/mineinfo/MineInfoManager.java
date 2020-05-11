@@ -1,6 +1,7 @@
 package com.example.mine.mineinfo;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -21,7 +22,13 @@ public class MineInfoManager {
     }
 
     public MineInfo getMineInfo(String key) {
-        return map.get(key);
+        Log.d("Mineinfomanager", String.format("iscontainskey%b", map.containsKey(key)));
+        if (map.containsKey(key)){
+            return map.get(key);
+        }
+        else{
+            return getMineInfo("notexist");
+        }
     }
 
     private Map<String, MineInfo> load(Context context) {
@@ -42,6 +49,7 @@ public class MineInfoManager {
         Map<String, MineInfo> map = new HashMap<>();
         for (MineInfo mineInfo : list) {
             map.put(mineInfo.EnglishName, mineInfo);
+            map.put(mineInfo.ChineseName, mineInfo);
         }
         return map;
     }

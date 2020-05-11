@@ -1,6 +1,7 @@
 package com.example.mine;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -41,7 +42,7 @@ public class P5Activity extends AppCompatActivity {
         setContentView(R.layout.activity_p5);
 
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this,
-                R.array.planets_array, android.R.layout.simple_spinner_item);
+                R.array.yyw_array, android.R.layout.simple_spinner_item);
 
         // 设置recycler示例
         recycler = findViewById(R.id.recycler);
@@ -57,7 +58,7 @@ public class P5Activity extends AppCompatActivity {
 
         list.add(new SpinnerData("透明度", DataType.SPINER_TYPE, spinnerAdapter));
 
-        list.add(new EditTextData("颜色", DataType.EDIT_TEXT_TYPE));
+        list.add(new EditTextData("颜色", DataType.EDIT_TEXT_TYPE,""));
 
         list.add(new FromToSpinnerData("硬度", DataType.FROM_TO_SPINNER_TYPE, spinnerAdapter, true));
         list.add(new FromToSpinnerData("硬度", DataType.FROM_TO_SPINNER_TYPE, spinnerAdapter, false));
@@ -77,8 +78,9 @@ public class P5Activity extends AppCompatActivity {
                 String json = gson.toJson(obj);
 
                 UploadStringService service = RetrofitClientInstance.getRetrofitInstance().create(UploadStringService.class);
+                Log.d("P5activity", String.format("uploading%s", json));
                 Call<MineTypeResponse> call = service.uploadString(json);
-
+//                Log.d("P5activity", String.format("uploadsuccessful%s", json));
                 call.enqueue(new Callback<MineTypeResponse>() {
                     @Override
                     public void onResponse(Call<MineTypeResponse> call, Response<MineTypeResponse> response) {

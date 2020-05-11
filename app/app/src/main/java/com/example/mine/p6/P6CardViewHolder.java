@@ -2,6 +2,7 @@ package com.example.mine.p6;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,7 +35,7 @@ public class P6CardViewHolder extends MyViewHolder {
         mTextView.setText(text);
 
         String imagePath=data.getImagePath();
-
+        Log.d("P6CardViewHolder", String.format("whatisimagepath%s", imagePath));
         Bitmap bitmap = null;
         try {
             InputStream in = data.getContext().getAssets().open(imagePath);

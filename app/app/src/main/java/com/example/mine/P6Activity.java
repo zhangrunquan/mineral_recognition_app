@@ -31,27 +31,30 @@ public class P6Activity extends AppCompatActivity {
 
         // 组织recycler中的内容
         List<ViewData> list = new ArrayList<>();
+        final String actionCode = getIntent().getStringExtra("chemistry");
 
-
-        // 从矿物信息获取指定类别
-        String type = "oh";
+//        // 从矿物信息获取指定类别
+//        String type = actionCode;
 
         MineInfoManager manager = new MineInfoManager(this);
         List<MineInfo> infoList = manager.filter(new MineInfoManager.MineInfoFilter() {
             @Override
             public boolean filter(MineInfo mineInfo) {
-                return mineInfo.chemistry.equals("oh");
+                return mineInfo.chemistry.equals(actionCode);
             }
         });
 
         for (MineInfo mineInfo : infoList) {
-            String imagePath = mineInfo.images.get(0);
-            String englishName = mineInfo.EnglishName;
+            for (String imagePath:mineInfo.images){
+//                String imagePath = mineInfo.images.get(0);
+                String englishName = mineInfo.EnglishName;
 
-            Map<String, String> textMap = new HashMap<>();
-            textMap.put("englishName", englishName);
+                Map<String, String> textMap = new HashMap<>();
+                textMap.put("englishName", englishName);
 
-            list.add(new P6CardViewData(DataType.P6_CARD_VIEW_DATA, imagePath, textMap, this));
+                list.add(new P6CardViewData(DataType.P6_CARD_VIEW_DATA, imagePath, textMap, this));
+            }
+
         }
 
         P6RecyclerAdapter recyclerAdapter = new P6RecyclerAdapter(list);

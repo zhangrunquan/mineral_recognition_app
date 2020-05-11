@@ -1,14 +1,28 @@
 <resources>
     <string name="app_name">Mine</string>
-    <string-array name="planets_array">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
+    <string-array name="tmd_array">
+        <item>请选择</item>
+        <item>透明</item>
+        <item>半透明</item>
+        <item>不透明</item>
     </string-array>
-
+    <string-array name="yw_array">
+        <item>请选择</item>
+        <item>有</item>
+        <item>无</item>
+    </string-array>
+    <string-array name="yyw_array">
+        <item>请选择</item>
+        <item>有弹性</item>
+        <item>有挠性</item>
+        <item>无</item>
+    </string-array>
+    <string name="title_activity_p1">Mine</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="category">分类</string>
+    <string name="camera">拍照</string>
+    <string name="experiment">实验</string>
+    <string name="mine">我的</string>
 </resources>

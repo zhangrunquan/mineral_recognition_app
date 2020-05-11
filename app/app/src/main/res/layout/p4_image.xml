@@ -6,7 +6,7 @@
 
     <ImageView
         android:id="@+id/p4Image"
-        android:layout_width="184dp"
-        android:layout_height="149dp"
+        android:layout_width="164dp"
+        android:layout_height="129dp"
         app:srcCompat="@mipmap/logo" />
 </LinearLayout>

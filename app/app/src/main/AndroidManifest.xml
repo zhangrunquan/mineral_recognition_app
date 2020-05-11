@@ -15,20 +15,37 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".P6Activity"></activity>
-        <activity android:name=".P5Activity" />
-        <activity android:name=".P4Activity" />
-        <activity android:name=".P3Activity" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".MineInfoActivity" />
-        <activity android:name=".EsActivity" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".P1Activity"
+            android:label="@string/title_activity_p1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".P6Activity" />
+        <activity android:name=".P5Activity" >
+<!--        <intent-filter>-->
+<!--            <action android:name="android.intent.action.MAIN" />-->
+<!--            <category android:name="android.intent.category.LAUNCHER" />-->
+<!--        </intent-filter>-->
+        </activity>
+        <activity android:name=".P4Activity"
+            android:parentActivityName=".P1Activity">
+        </activity>
+        <activity android:name=".P3Activity" android:parentActivityName=".P3Activity"/>
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".MineInfoActivity" />
+        <activity android:name=".EsActivity" />
+<!--        <activity android:name=".MainActivity">-->
+
+<!--             <intent-filter>-->
+<!--             <action android:name="android.intent.action.MAIN" />-->
+
+
+<!--             <category android:name="android.intent.category.LAUNCHER" />-->
+<!--             </intent-filter>-->
+<!--        </activity>-->
     </application>
 
 </manifest>

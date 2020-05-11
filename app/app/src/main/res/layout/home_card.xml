@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+<!--    <Button-->
+<!--        android:id="@+id/chemical_button_1"-->
+<!--        style="@style/Widget.AppCompat.Button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="142dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:background="@drawable/p11"-->
+<!--        android:text="含盐类矿物"-->
+<!--        android:textColor="@android:color/white"-->
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Large" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/chemical_button_2"-->
+<!--        style="@style/Widget.AppCompat.Button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="142dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:background="@drawable/p11"-->
+<!--        android:text="硫化物类矿物"-->
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
+<!--        android:textColor="@android:color/white" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/chemical_button_3"-->
+<!--        style="@style/Widget.AppCompat.Button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="142dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:background="@drawable/p11"-->
+<!--        android:text="自然元素矿物"-->
+<!--        android:textColor="@android:color/white"-->
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Large" />-->
+<!--    <Button-->
+<!--        android:id="@+id/chemical_button_4"-->
+<!--        style="@style/Widget.AppCompat.Button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="142dp"-->
+<!--        android:layout_weight="1"-->
+<!--        android:background="@drawable/p11"-->
+<!--        android:text="氧化物及氢氧化物类矿物"-->
+<!--        android:textColor="@android:color/white"-->
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Large" />-->
+
+</LinearLayout>

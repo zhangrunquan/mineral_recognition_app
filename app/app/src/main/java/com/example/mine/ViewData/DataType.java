@@ -10,4 +10,5 @@ public class DataType {
     public static final int P4_IMAGE_RECYCLER_TYPE=7;
     public static final int P4_TEXT_TYPE=8;
     public static final int P4_IMAGE_TYPE=9;
+    public static final int BUTTON_TYPE=10;
 }
