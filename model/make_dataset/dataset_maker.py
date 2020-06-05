@@ -37,8 +37,9 @@ class DatasetMaker():
         directories = [os.path.join(input_dir, v) for v in directories]
         tmp = dict(enumerate(directories))
         label_num_mapping = {v: k for k, v in tmp.items()}
-        pickle.dump(label_num_mapping, os.path.join(output_dir, 'label_num_mapping'))
         Tools.create_save_dir(output_dir)
+        with open(os.path.join(output_dir, 'label_num_mapping'),"wb") as f:
+            pickle.dump(label_num_mapping,f)
         if (sample_mode == 'over_sample'):
             x_train, y_train, x_test, y_test = Loader.load_pics_over_sample(directories, label_num_mapping, num_classes,
                                                                             test_split=0.1, label_mode=label_mode)
